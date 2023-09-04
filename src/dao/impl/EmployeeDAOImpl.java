@@ -31,6 +31,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     // Para obtener todos los empleados
     @Override
     public List<EmployeeDTO> getAllEmployees() {
+
         try {
             // Establecer la conexión
             Connection connection = getDBConnection();
@@ -41,17 +42,21 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             // Sentencia SQL para leer todos los empleados
             String getAllEmployeesSQL = "SELECT * FROM gestion_empleados.Empleados;";
 
-            // Cerrar la conexión
-            statement.close();
-            connection.close();
+            // Ejecuta la consulta
+            ResultSet allEmployees = statement.executeQuery(getAllEmployeesSQL);
 
-            // Ejecuta la consulta y devuelve el resultado
-            return resultSetToList(statement.executeQuery(getAllEmployeesSQL));
+            // Devuelve el resultado
+            return resultSetToList(allEmployees);
+
+            // Cerrar la conexión
+//            statement.close();
+//            connection.close();
 
         } catch (SQLException e) {
             System.out.println("No se pudieron encontrar todos los empleados");
             throw new RuntimeException(e);
         }
+
     }
 
     // Para mostrar todos los empleados por consola
@@ -65,7 +70,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     // Para agregar un nuevo empleado en la tabla Empleados
     @Override
-    public void addEmployee(EmployeeDTO employee) {
+    public void addEmployee(String name, Double salary) {
         try {
             // Establecer la conexión
             Connection connection = getDBConnection();
@@ -77,15 +82,15 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             PreparedStatement statement = connection.prepareStatement(addEmployeeSQL);
 
             // Establecer los valores en el PreparedStatement
-            statement.setString(1, employee.getName());
-            statement.setDouble(2, employee.getSalary());
+            statement.setString(1, name);
+            statement.setDouble(2, salary);
 
             // Ejecutar la inserción
             statement.executeUpdate();
 
             // Cerrar la conexión
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
 
         } catch (SQLException e) {
             System.out.println("El registro no pudo ser agregado");
@@ -110,12 +115,15 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             // Establecer los valores en el PreparedStatement
             statement.setInt(1, id);
 
+            // Ejecuta la consulta
+            ResultSet employee = statement.executeQuery();
+
             // Cerrar la conexión
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
 
             // Ejecuta la consulta y devuelve el resultado
-            return resultSetToEmployeeDTO(statement.executeQuery());
+            return resultSetToEmployeeDTO(employee);
 
         } catch (SQLException e) {
             System.out.println("No se encontró el registro");
@@ -154,8 +162,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             }
 
             // Cerrar la conexión
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
 
         } catch (SQLException e) {
             System.out.println("El registro no pudo ser actualizado");
@@ -191,8 +199,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             }
 
             // Cerrar la conexión
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
 
         } catch (SQLException e) {
             System.out.println("El registro no pudo ser eliminado");
