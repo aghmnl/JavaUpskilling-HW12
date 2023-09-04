@@ -11,7 +11,7 @@ public class JDBCConfig {
     private static final String DB_USER = "sa";
     private static final String DB_PASSWORD = "";
 
-    public static Connection getDBConnectio() {
+    public static Connection getDBConnection() {
         Connection connection = null;
 
         try {
