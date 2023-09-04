@@ -34,4 +34,10 @@ public class EmployeeDTO {
     public void setSalary(double salary) {
         this.salary = salary;
     }
+
+    @Override
+    public String toString() {
+        return "(" + id + ") " + name + " [" + salary + "]";
+    }
+
 }

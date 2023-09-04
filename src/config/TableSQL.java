@@ -7,7 +7,7 @@ import static config.JDBCConfig.getDBConnection;
 public class TableSQL {
 
 
-// Creando tabla en base de datos
+    // Creando tabla en base de datos
     public static void createTableEmployees() {
         try {
             // Establecer la conexión
@@ -22,7 +22,7 @@ public class TableSQL {
 
             // Creando una tabla Empleados
             String createTableEmployees = "CREATE TABLE IF NOT EXISTS gestion_empleados.Empleados (id INT PRIMARY KEY AUTO_INCREMENT, " +
-                    "nombre VARCHAR(250) NOT NULL, salario DECIMAL NOT NULL);";
+                    "nombre VARCHAR(250) NOT NULL, salario DECIMAL);";
             statement.executeUpdate(createTableEmployees);
 
             // Cerrar la conexión

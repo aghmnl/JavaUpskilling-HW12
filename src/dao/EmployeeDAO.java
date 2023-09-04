@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface EmployeeDAO {
 
-    List<EmployeeDTO> getAllEmployee();
-    void mostrarTodos();
+    List<EmployeeDTO> getAllEmployees();
+    void showAllEmployees();
     void addEmployee(EmployeeDTO e);
-    EmployeeDAO getEmployee(int id);
-    void updateEmployee(int id, EmployeeDTO usuario);
+    EmployeeDTO getEmployee(int id);
+    void updateEmployee(EmployeeDTO employee);
     void deleteEmployee(int id);
 }
